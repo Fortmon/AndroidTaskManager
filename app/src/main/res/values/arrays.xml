@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="menu_items">
+        <item>Проекты</item>
+        <item>Задачи</item>
+        <item>Настройки</item>
+        <item>Выход</item>
+    </array>
+</resources>
