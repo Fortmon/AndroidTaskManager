@@ -20,7 +20,7 @@ import ru.university.ifmo.also.taskmanager.model.UserLoginResponse;
 import ru.university.ifmo.also.taskmanager.model.ValidateModel;
 
 public class ApiManager {
-    private static final String BASE_URL="https://also-server.azurewebsites.net/api";
+    private static final String BASE_URL="https://also-server.azurewebsites.net/api/";
     private static final String TAG = "ApiManager";
 
     SharedPreferences sharedPreferences;
