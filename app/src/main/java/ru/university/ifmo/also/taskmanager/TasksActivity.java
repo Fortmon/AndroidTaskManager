@@ -22,6 +22,7 @@ import java.util.List;
 import retrofit2.Response;
 import ru.university.ifmo.also.taskmanager.adapter.TaskArrayAdapter;
 import ru.university.ifmo.also.taskmanager.model.ProjectInfo;
+import ru.university.ifmo.also.taskmanager.model.TaskFilter;
 import ru.university.ifmo.also.taskmanager.model.TaskInfo;
 import ru.university.ifmo.also.taskmanager.model.ValidateModel;
 import ru.university.ifmo.also.taskmanager.server.ApiManager;
@@ -37,10 +38,12 @@ public class TasksActivity extends AppCompatActivity {
         @Override
         public void onResponse(Call<ValidateModel<List<TaskInfo>>> call, Response<ValidateModel<List<TaskInfo>>> response) {
             if(response.isSuccessful()){
-                List<TaskInfo> items = response.body().getEntity();
-                if (items != null && items.size() > 0) {
-                    TaskArrayAdapter adapter = new TaskArrayAdapter(TasksActivity.this, items);
-                    lvTasks.setAdapter(adapter);
+                if (response.body() != null) {
+                    List<TaskInfo> items = response.body().getEntity();
+                    if (items != null && items.size() > 0) {
+                        TaskArrayAdapter adapter = new TaskArrayAdapter(TasksActivity.this, items);
+                        lvTasks.setAdapter(adapter);
+                    }
                 }
             }
             else{
@@ -74,7 +77,9 @@ public class TasksActivity extends AppCompatActivity {
         lblProjectDescription.setText(projectDescription);
 
         //lvTasks = findViewById(R.id.lvTasks);
-        ApiManager.getAllTasks(projectId, onGetTasks);
+        TaskFilter taskFilter = new TaskFilter();
+        taskFilter.setProjectId(projectId);
+        ApiManager.getAllTasks( taskFilter , onGetTasks);
     }
 
 }

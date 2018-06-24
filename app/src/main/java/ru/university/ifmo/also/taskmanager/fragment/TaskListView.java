@@ -19,6 +19,7 @@ import ru.university.ifmo.also.taskmanager.TasksActivity;
 import ru.university.ifmo.also.taskmanager.adapter.ProjectArrayAdapter;
 import ru.university.ifmo.also.taskmanager.adapter.TaskArrayAdapter;
 import ru.university.ifmo.also.taskmanager.model.ProjectInfo;
+import ru.university.ifmo.also.taskmanager.model.TaskFilter;
 import ru.university.ifmo.also.taskmanager.model.TaskInfo;
 import ru.university.ifmo.also.taskmanager.model.ValidateModel;
 import ru.university.ifmo.also.taskmanager.server.ApiManager;
@@ -84,6 +85,8 @@ public class TaskListView extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "Fragment onResume");
-        ApiManager.getAllTasks(projectId, onGetTasks);
+        TaskFilter taskFilter = new TaskFilter();
+
+        ApiManager.getAllTasks(taskFilter, onGetTasks);
     }
 }

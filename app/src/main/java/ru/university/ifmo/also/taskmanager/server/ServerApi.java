@@ -21,8 +21,14 @@ public interface ServerApi {
     @POST("project")
     Call<ValidateModel<ProjectInfo>> createProject(@Header("Authorization") String access_token, @Body CreateProject project);
 
-    @GET("task/all/{projectId}")
-    Call<ValidateModel<List<TaskInfo>>> getAllTasks(@Header("Authorization") String access_token, @Path("projectId") String projectId);
+    @GET("task/all/")
+    Call<ValidateModel<List<TaskInfo>>> getAllTasks(@Header("Authorization") String access_token,
+                                                    @Query("projectId") String projectId,
+                                                    @Query("title") String title,
+                                                    @Query("ownerLogin") String ownerLogin,
+                                                    @Query("assignedLogin") String assignedLogin,
+                                                    @Query("priority") Integer priority,
+                                                    @Query("type") Integer type);
 
     @POST("account/register")
     Call<ValidateModel<UserRegisterResponse>> register(@Body UserRegisterRequest register);
