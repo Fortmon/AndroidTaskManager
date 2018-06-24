@@ -73,6 +73,7 @@ public class TasksActivity extends AppCompatActivity {
         lblProjectName.setText(projectName);
         lblProjectDescription.setText(projectDescription);
 
+        //lvTasks = findViewById(R.id.lvTasks);
         ApiManager.getAllTasks(projectId, onGetTasks);
     }
 

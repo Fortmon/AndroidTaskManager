@@ -1,7 +1,8 @@
-package ru.university.ifmo.also.taskmanager;
+package ru.university.ifmo.also.taskmanager.fragment;
 
 import android.app.Activity;
-import android.app.Fragment;
+//import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import ru.university.ifmo.also.taskmanager.R;
 import ru.university.ifmo.also.taskmanager.adapter.ProjectArrayAdapter;
 import ru.university.ifmo.also.taskmanager.model.ProjectInfo;
 import ru.university.ifmo.also.taskmanager.model.ValidateModel;
@@ -22,7 +24,6 @@ import ru.university.ifmo.also.taskmanager.server.ApiManager;
 
 public class ProjectListView extends Fragment {
     private final String TAG = "PROJECT_LIST_VIEW";
-    Activity context;
     ListView lvProjects;
 
     Callback<ValidateModel<List<ProjectInfo>>> onGetProject = new Callback<ValidateModel<List<ProjectInfo>>>() {
@@ -33,8 +34,9 @@ public class ProjectListView extends Fragment {
             if (response.isSuccessful()){
                 List<ProjectInfo> items = response.body().getEntity();
                 if (items != null && items.size() > 0) {
-                    ProjectArrayAdapter adapter = new ProjectArrayAdapter(context, items);
+                    ProjectArrayAdapter adapter = new ProjectArrayAdapter(ProjectListView.this.getContext(), items);
                     lvProjects.setAdapter(adapter);
+                    Log.d(TAG,"projects fetched: ");
                 }
             }
             else{
@@ -51,7 +53,6 @@ public class ProjectListView extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        this.context = activity;
 
         Log.d(TAG, "Fragment1 onAttach");
     }
@@ -67,9 +68,6 @@ public class ProjectListView extends Fragment {
 
         View view =inflater.inflate(R.layout.project_list_view, null);
         lvProjects = view.findViewById(R.id.lvProjects);
-
-        ApiManager.getAllProjects(onGetProject);
-
 
         return view;
     }
@@ -87,6 +85,7 @@ public class ProjectListView extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "Fragment1 onResume");
+        ApiManager.getAllProjects(onGetProject);
     }
 
     public void onPause() {

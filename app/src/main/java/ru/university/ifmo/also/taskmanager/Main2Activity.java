@@ -1,7 +1,7 @@
 package ru.university.ifmo.also.taskmanager;
 
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,13 +18,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import ru.university.ifmo.also.taskmanager.adapter.ProjectArrayAdapter;
-import ru.university.ifmo.also.taskmanager.model.ProjectInfo;
+import ru.university.ifmo.also.taskmanager.fragment.ProjectListView;
+import ru.university.ifmo.also.taskmanager.fragment.TaskListView;
 import ru.university.ifmo.also.taskmanager.model.UserLoginResponse;
 import ru.university.ifmo.also.taskmanager.model.ValidateModel;
 import ru.university.ifmo.also.taskmanager.server.ApiManager;
@@ -35,7 +33,8 @@ public class Main2Activity extends AppCompatActivity
 
     private static final String TAG = "MAIN_ACTIVITY";
     FragmentTransaction fragmentTransaction;
-    Fragment frListProjects;
+ //   Fragment frListProjects;
+ //   Fragment frCurrentFragment;
 
 
     Callback<ValidateModel<UserLoginResponse>> onLogin = new Callback<ValidateModel<UserLoginResponse>>() {
@@ -97,7 +96,7 @@ public class Main2Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        frListProjects = new ProjectListView();
+      /*  frListProjects = new ProjectListView();*/
 
 
         if (!Utility.getIsLoginned()){
@@ -112,6 +111,12 @@ public class Main2Activity extends AppCompatActivity
                 Intent intent = new Intent(this, LoginActivity.class );
                 startActivity(intent);
             }
+        }
+
+        if (savedInstanceState == null){
+          //  frCurrentFragment = frListProjects;
+            navigationView.getMenu().getItem(0).setChecked(true);
+            getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, new ProjectListView()).commit();
         }
 
         if (Utility.getIsLoginned()) {
@@ -156,11 +161,18 @@ public class Main2Activity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        Fragment newFragment = null;
+
 
         switch (id){
             case R.id.nav_projects:{
-                fragmentTransaction.add(R.id.content_frame, frListProjects);
+                newFragment = new ProjectListView();
+                break;
+            }
+
+            case R.id.nav_tasks: {
+                newFragment = new TaskListView();
                 break;
             }
 
@@ -183,19 +195,11 @@ public class Main2Activity extends AppCompatActivity
             }
         }
 
+        if (newFragment != null){
+            fragmentTransaction.replace(R.id.content_frame, newFragment);
+        }
+
         fragmentTransaction.commit();
-
-       /* if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
