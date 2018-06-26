@@ -17,13 +17,6 @@ public class TaskArrayAdapter extends ArrayAdapter<TaskInfo> {
     private final Context context;
     private final List<TaskInfo> items;
 
-    View.OnClickListener onRowClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-
-        }
-    };
-
     public TaskArrayAdapter(Context context, List<TaskInfo> items){
         super(context, -1, items);
         this.context = context;
@@ -36,7 +29,6 @@ public class TaskArrayAdapter extends ArrayAdapter<TaskInfo> {
         View rowView = inflater.inflate(R.layout.task_list_view_item, parent, false);
         TextView lblTaskTitle = rowView.findViewById(R.id.lblTaskTitle);
         TextView lblDescription = rowView.findViewById(R.id.lblTaskDescription);
-        rowView.setOnClickListener(onRowClick);
 
         lblTaskTitle.setText(items.get(position).getTitle());
         lblDescription.setText(items.get(position).getDescription());

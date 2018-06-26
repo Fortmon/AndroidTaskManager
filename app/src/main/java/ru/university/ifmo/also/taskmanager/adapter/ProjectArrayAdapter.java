@@ -2,6 +2,8 @@ package ru.university.ifmo.also.taskmanager.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,23 +20,6 @@ public class ProjectArrayAdapter extends ArrayAdapter<ProjectInfo> {
     private final Context context;
     private final List<ProjectInfo> items;
 
-    View.OnClickListener onRowClick = new View.OnClickListener() {
-        @Override
-        public void onClick(View rowView) {
-            TextView lblProject = rowView.findViewById(R.id.lblProjectTitle);
-            TextView lblDescription = rowView.findViewById(R.id.lblProjectDescription);
-            TextView lblProjectId = rowView.findViewById(R.id.lblProjectId);
-
-            Intent intent = new Intent(ProjectArrayAdapter.this.context, TasksActivity.class);
-
-            intent.putExtra("title", lblProject.getText().toString() );
-            intent.putExtra("description", lblDescription.getText().toString() );
-            intent.putExtra("projectId", lblProjectId.getText().toString() );
-
-            ProjectArrayAdapter.this.context.startActivity(intent);
-        }
-    };
-
     public ProjectArrayAdapter(Context context, List<ProjectInfo> items){
         super(context, -1, items);
         this.context = context;
@@ -48,7 +33,7 @@ public class ProjectArrayAdapter extends ArrayAdapter<ProjectInfo> {
         TextView lblProject = rowView.findViewById(R.id.lblProjectTitle);
         TextView lblDescription = rowView.findViewById(R.id.lblProjectDescription);
         TextView lblProjectId = rowView.findViewById(R.id.lblProjectId);
-        rowView.setOnClickListener(onRowClick);
+      //  rowView.setOnClickListener(onRowClick);
 
         lblProject.setText(items.get(position).getTitle());
         lblDescription.setText(items.get(position).getDescription());
