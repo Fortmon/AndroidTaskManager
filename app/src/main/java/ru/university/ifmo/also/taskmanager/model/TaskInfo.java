@@ -12,6 +12,7 @@ public class TaskInfo {
     private int priority;
     private int type;
     private String creationTime;
+    private int status;
 
     public UUID getId() {
         return id;
@@ -83,5 +84,13 @@ public class TaskInfo {
 
     public void setCreationTime(String creationTime) {
         this.creationTime = creationTime;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
     }
 }

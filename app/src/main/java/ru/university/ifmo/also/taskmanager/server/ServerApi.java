@@ -51,6 +51,18 @@ public interface ServerApi {
                                                     @Query("priority") Integer priority,
                                                     @Query("type") Integer type);
 
+    @GET("task/{id}")
+    Call<ValidateModel<TaskInfo>> getTask (@Header("Authorization") String access_token,
+                                           @Path("id") String taskId);
+
+    @POST("task")
+    Call<ValidateModel<TaskInfo>> createTask (@Header("Authorization") String access_token,
+                                              @Body CreateTask task);
+
+    @PUT("task")
+    Call<Void> updateTask (@Header("Authorization") String access_token,
+                           @Body TaskInfo taskInfo);
+
     @GET("user/project/{projectId}")
     Call<ValidateModel<List<UserInfo>>> getUsers (@Header("Authorization") String access_token,
                                                   @Path("projectId") String projectId);

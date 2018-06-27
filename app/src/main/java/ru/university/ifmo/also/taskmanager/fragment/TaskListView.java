@@ -26,6 +26,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import ru.university.ifmo.also.taskmanager.CreateProjectActivity;
 import ru.university.ifmo.also.taskmanager.R;
+import ru.university.ifmo.also.taskmanager.TaskDetail;
 import ru.university.ifmo.also.taskmanager.TasksActivity;
 import ru.university.ifmo.also.taskmanager.adapter.ProjectArrayAdapter;
 import ru.university.ifmo.also.taskmanager.adapter.TaskArrayAdapter;
@@ -46,33 +47,11 @@ public class TaskListView extends Fragment {
     AdapterView.OnItemClickListener onRowClick = new AdapterView.OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View rowView, int position, long id) {
+            TextView lblTaskId = rowView.findViewById(R.id.lblTaskId);
 
-/*            TextView lblProject = rowView.findViewById(R.id.lblProjectTitle);
-            TextView lblDescription = rowView.findViewById(R.id.lblProjectDescription);*/
-            /*TextView lblProjectId = rowView.findViewById(R.id.lblProjectId);
-
-            TaskFilter projectTaskFilter = new TaskFilter();
-            projectTaskFilter.setProjectId(lblProjectId.getText().toString());
-            Utility.setTaskFilter(projectTaskFilter);*/
-
-         /*   Fragment newFragment  = new TaskListView();
-            FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.content_frame, newFragment);
-            fragmentTransaction.commit();*/
-
-
-
-         /*   Intent intent = new Intent(ProjectArrayAdapter.this.context, TasksActivity.class);
-
-            intent.putExtra("title", lblProject.getText().toString() );
-            intent.putExtra("description", lblDescription.getText().toString() );
-            intent.putExtra("projectId", lblProjectId.getText().toString() );*/
-
-            //  ProjectArrayAdapter.this.context.startActivity(intent);
-
-
-            //  FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-
+            Intent intent = new Intent(TaskListView.this.context, TaskDetail.class);
+            intent.putExtra("taskId", lblTaskId.getText().toString());
+            startActivityForResult(intent, 1);
         }
     };
 
@@ -122,7 +101,7 @@ public class TaskListView extends Fragment {
         btnCreateTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TaskListView.this.context , CreateProjectActivity.class);
+                Intent intent = new Intent(TaskListView.this.context , TaskDetail.class);
                 startActivityForResult(intent, 1);
             }
         });

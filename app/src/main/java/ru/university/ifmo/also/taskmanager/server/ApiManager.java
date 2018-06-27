@@ -13,6 +13,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import ru.university.ifmo.also.taskmanager.LoginActivity;
 import ru.university.ifmo.also.taskmanager.model.CreateProject;
+import ru.university.ifmo.also.taskmanager.model.CreateTask;
 import ru.university.ifmo.also.taskmanager.model.ProjectInfo;
 import ru.university.ifmo.also.taskmanager.model.TaskFilter;
 import ru.university.ifmo.also.taskmanager.model.TaskInfo;
@@ -94,5 +95,20 @@ public class ApiManager {
     public static void getProject(String projectId, Callback<ValidateModel<ProjectInfo>> callback){
         Call<ValidateModel<ProjectInfo>> getProject = serverApi.getProject(Utility.getAccessToken(), projectId);
         getProject.enqueue(callback);
+    }
+
+    public static void getTask(String taskId, Callback<ValidateModel<TaskInfo>> callback){
+        Call<ValidateModel<TaskInfo>> getTask = serverApi.getTask(Utility.getAccessToken(), taskId);
+        getTask.enqueue(callback);
+    }
+
+    public static void createTask(CreateTask task, Callback<ValidateModel<TaskInfo>> callback){
+        Call<ValidateModel<TaskInfo>> createTask = serverApi.createTask(Utility.getAccessToken(), task);
+        createTask.enqueue(callback);
+    }
+
+    public static void updateTask(TaskInfo task, Callback<Void> callback){
+        Call<Void> updateTask = serverApi.updateTask(Utility.getAccessToken(), task);
+        updateTask.enqueue(callback);
     }
 }

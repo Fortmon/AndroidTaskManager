@@ -29,9 +29,11 @@ public class TaskArrayAdapter extends ArrayAdapter<TaskInfo> {
         View rowView = inflater.inflate(R.layout.task_list_view_item, parent, false);
         TextView lblTaskTitle = rowView.findViewById(R.id.lblTaskTitle);
         TextView lblDescription = rowView.findViewById(R.id.lblTaskDescription);
+        TextView lblTaskId = rowView.findViewById(R.id.lblTaskId);
 
         lblTaskTitle.setText(items.get(position).getTitle());
         lblDescription.setText(items.get(position).getDescription());
+        lblTaskId.setText(items.get(position).getId().toString());
 
         return rowView;
     }

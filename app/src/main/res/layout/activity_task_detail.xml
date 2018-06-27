@@ -1,9 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".server.TaskDetail">
+    android:orientation="vertical">
 
-</android.support.constraint.ConstraintLayout>
+    <EditText
+        android:id="@+id/txtTaskTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtTaskDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtTaskCreationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/txtTaskOwner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="gone" />
+
+    <EditText
+        android:id="@+id/txtTaskAssigend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:visibility="gone" />
+
+    <Spinner
+        android:id="@+id/spPriority"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/spTaskType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Spinner
+        android:id="@+id/spTaskStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone" />
+
+    <Button
+        android:id="@+id/btnCreateTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Создать" />
+
+</LinearLayout>
